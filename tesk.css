@@ -1,0 +1,119 @@
+html, body {
+    height: 100%;
+  }
+html {
+    background: #eee;
+  }
+
+  
+  .box {
+    width: 100%;
+    height: 300px;
+    border-radius: 5px;
+    box-shadow: 0 2px 30px rgba(black, .2);
+    background: lighten(#f0f4c3, 10%);
+    position: relative;
+    overflow: hidden;
+    transform: translate3d(0, 0, 0);
+  }
+  
+  .wave {
+    opacity: .4;
+    position: absolute;
+    left: 50%;
+    background-image: linear-gradient(45deg,rgb(37, 61, 151), rgb(157, 84, 150));
+    width: 500px;
+    height: 500px;
+    margin-left: -250px;
+    margin-top: -120px;
+    transform-origin: 50% 48%;
+    border-radius: 43%;
+    animation: drift 3000ms infinite linear;
+  }
+  
+  .wave.-three {
+    animation: drift 5000ms infinite linear;
+  }
+  
+  .wave.-two {
+    animation: drift 7000ms infinite linear;
+    opacity: .1;
+    background: yellow;
+  }
+  
+  .box:after {
+    content: '';
+    display: block;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, rgba(#e8a, 1), rgba(#def, 0) 80%, rgba(white, .5));
+    z-index: 11;
+    transform: translate3d(0, 0, 0);
+  }
+  
+  .title {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    z-index: 1;
+    line-height: 300px;
+    text-align: center;
+    transform: translate3d(0, 0, 0);
+    color: white;
+    text-transform: uppercase;
+    font-family: 'Playfair Display', serif;
+    letter-spacing: .4em;
+    font-size: 24px;
+
+    text-shadow: 1px 1px 3px rgb(34, 32, 91) ;
+    text-indent: .3em;
+  }
+
+  a {
+    text-decoration: none;
+    color: rgb(27, 27, 27);
+    font-weight: bold;
+    font-size: large;}
+
+    .wrapper {
+      display: flex;
+    }
+    
+    .content {
+      order: 3;
+      width: 100%;
+      padding: 30px;
+
+    }
+
+    .v-line {
+      order: 2;
+      border : MIDDLE solid #8d8d8d;
+      }
+    
+    .sidebar {
+      order: 1;
+      width: 300px;
+      padding: 30px;
+    }
+
+    .p {
+      text-indent: 2em;
+      font-size: 20px;
+    }
+
+    .content.code{
+      width: 100px;
+      background-color:rgb(92, 92, 92); 
+      padding:20px;
+    }
+
+
+  @keyframes drift {
+    from { transform: rotate(0deg); }
+    from { transform: rotate(360deg); }
+  }
+
