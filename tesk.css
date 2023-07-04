@@ -80,6 +80,8 @@ html {
 
     .wrapper {
       display: flex;
+      padding: 30px;
+
     }
     
     .content {
@@ -111,6 +113,9 @@ html {
       padding:20px;
     }
 
+    .content.image{
+      width: 400px;
+    }
 
   @keyframes drift {
     from { transform: rotate(0deg); }
