@@ -1,0 +1,179 @@
+html, body {
+  min-height: 100%;
+  background:  #ffffff;
+}
+
+html {
+    height: 100%;
+  }
+  .sample-header {
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 400px;
+    background: url("/week2/바다\ 사진.jpg");
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+  
+  .title {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    z-index: 1;
+    line-height: 400px;
+    text-align: center;
+    transform: translate3d(0, 0, 0);
+    color: white;
+    text-transform: uppercase;
+    font-family: 'Oswald', sans-serif;
+    letter-spacing: .4em;
+    font-size: 26px;
+
+    text-shadow: 1px 1px 3px rgb(34, 32, 91) ;
+    text-indent: .3em;
+  }
+
+body {
+    min-height: 100%;
+
+
+  }
+
+
+
+  nav {
+    position: relative;
+    display: flex;
+    width: 1280px;
+    margin: 4em auto;
+  }
+  nav a {
+    display: block;
+    width: 20%;
+    padding: .75em 0;
+    color:  #2a2a39;
+    text-decoration: none;
+    text-align: center;
+  }
+  .nav-underline {
+    position: absolute;
+    left: 0;
+    bottom: -1px;
+    width: 12.5%;
+    height: 2px;
+    background: #2a2a39;
+    transition: all .3s ease-in-out;
+  }
+
+  nav a:nth-child(1).is-current ~ .nav-underline {
+    left: 0;
+  }
+  nav a:nth-child(2).is-current ~ .nav-underline {
+    left: 12.5%;
+  }
+  nav a:nth-child(3).is-current ~ .nav-underline {
+    left: 25%;
+  }
+  nav a:nth-child(4).is-current ~ .nav-underline {
+    left: 37.5%;
+  }
+  nav a:nth-child(5).is-current ~ .nav-underline {
+    left: 50%;
+  }
+  nav a:nth-child(6).is-current ~ .nav-underline {
+    left: 62.5%;
+  }
+  nav a:nth-child(7).is-current ~ .nav-underline {
+    left: 85%;
+  }
+  nav a:nth-child(8).is-current ~ .nav-underline {
+    left: 92.5%;
+  }
+
+
+  nav a:nth-child(1):hover ~ .nav-underline {
+    left: 0;
+  }
+  nav a:nth-child(2):hover ~ .nav-underline {
+    left: 12.5%;
+  }
+
+
+  a {
+    text-decoration: none;
+    color: rgb(27, 27, 27);
+    font-weight: bold;
+    font-size: large;}
+
+    .wrapper {
+      width: 1800px;
+      display: flex;
+      padding-left: 7%;
+      padding-right: 7%;
+    }
+
+    .bar:hover {
+      color:#7a7a80;
+    }
+    
+    .contents {
+      order: 3;
+      width: 1000px;
+    }
+
+    .v-line {
+      order: 2;
+      border : MIDDLE solid #8d8d8d;
+      }
+    
+    .sidebar {
+      order: 1;
+      width: 270px;
+    }
+
+    .p {
+      text-indent: 2em;
+      font-size: 20px;
+    }
+
+    .sub{
+      border-left: 0.5em solid #71798f; 
+      padding: 0.6em;
+    }
+
+    .content.code{
+      width: 100px;
+      background-color:rgb(92, 92, 92); 
+      padding:20px;
+    }
+
+    .content.image{
+      width: 400px;
+    }
+
+
+
+  @keyframes drift {
+    from { transform: rotate(0deg); }
+    from { transform: rotate(360deg); }
+  }
+
+  @font-face {
+    font-family: 'SUITE-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/SUITE-Regular.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+  font-family: 'Oswald', sans-serif;
+  src: url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;600&display=swap');
+
+}
+  * {
+	font-family: 'SUITE-Regular';
+}
+

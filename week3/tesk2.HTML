@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>TESK OF GARDEN</title>
+		<link type="text/css" rel="stylesheet" href="tesk.css">
+	
+		<div class ="sample-header">
+			<div class='title' id="처음으로">GARDEN'S BLOG</s></div>
+		</div>
+		<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+		<script type="text/javascript">
+		</script>	
+	</head>
+
+<body>
+<nav>
+	<a href="/week1/tesk1.HTML">Week1</a>
+	<a href="#">Week2</a>
+	<a href="#" class= "is-current"></a>Week3</a>
+	<a href="#">Week4</a>
+	<a href="#">Week5</a>
+	<a href="#">Week6</a>
+	<a href="#">Week7</a>
+	<a href="#">Week8</a>
+	<div class="nav-underline"></div>
+	</nav>
+
+
+<div class="wrapper">
+<aside class="sidebar">
+	<br><br>
+	<a class='bar' href="#서버-클라이언트와 소켓">서버-클라이언트와 소켓</a> <br><br>
+	<a class='bar' href="#소켓 프로그래밍">소켓 프로그래밍</a><br><br>
+	<a class='bar' href="#파일 디스크립터(소켓)">파일 디스크립터(소켓)</a><br><br>
+	<a class='bar' href="#http 요청(+헤더) 과 응답(+헤더)">http 요청(+헤더) 과 응답(+헤더)</a><br><br>
+	<a class='bar' href="#리눅스 select">리눅스 select</a><br><br>
+	<a class='bar' href="#리눅스 epoll">리눅스 epoll</a><br><br>
+	<a class='bar' href="#로드 밸런싱">로드 밸런싱</a><br><br>
+</aside>
+
+<div id= "v-line"></div>
+
+<section class="contents">
+	<h1> 3주차 :: 과제 2</h1>
+	<a href="/week2/tesk1.HTML" style="color:#7b4e4e">과제 1</a>
+	<hr>
+
+	<p>
+	<br>
+	<h2 id="서버-클라이언트와 소켓"><span class ="sub">서버-클라이언트와 소켓</span></h2>
+	<br>
+	<h3>소켓(Socket)과 소켓통신</h3>
+	소켓(Socket)은 TCP/IP 기반 네트워크 통신에서 데이터 송수신의 마지막 접점을 말한다.<br>
+	소켓통신은 이러한 소켓을 통해 서버-클라이언트간 데이터를 주고받는 양방향 연결 지향성 통신을 말한다.
+	소켓통신은 보통 지속적으로 연결을 유지하면서 실시간으로 데이터를 주고받아야 하는 경우에는 사용된다.<br>
+	<br>
+	소켓은 클라이언트 소켓과 서버 소켓으로 구분되며, 
+	소켓간 통신을 위해서는 네트워크상에서 클라이언트와 서버에 해당되는 컴퓨터를 식별하기 위한 IP주소와 해당 컴퓨터내에서 
+	현재 통신에 사용되는 응용프로그램을 식별하기 위한 포트번호가 사용된다.<br>
+	<br>
+	소켓통신에서는 서버와 클라이언트가 존재하며, 서버(Server)는 데이터를 제공하는 쪽을 말하며, 클라이언트(Client)는 데이터를 요청하여 제공받는 쪽을 말한다.<br>
+	</p>
+	<br>
+	<br>
+
+
+	<p>
+	<h2 id="소켓 프로그래밍"><span class ="sub">소켓 프로그래밍</span></h2>
+
+
+<div class ="code">
+<pre>
+[#include &lt;stdio.h &gt;
+	#include &lt;stdlib.h&gt;
+	#include &lt;string.h&gt;
+	#include &lt;unistd.h&gt;
+	
+	#include&lt;arpa/inet.h&gt;
+	#include&lt;sys/socket.h&gt;
+	
+	int main() {
+		int sock = socket(AF_INET, SOCK_STREAM, 0);
+		if (sock < 0) {
+			perror("socket");
+			return 1;
+		}
+	
+		struct sockaddr_in addr;
+		addr.sin_family = AF_INET;
+		addr.sin_port = htons(80);
+		addr.sin_addr.s_addr = inet_addr("0.0.0.0");
+	
+		int ret_b = bind(sock, (struct sockaddr *)&addr, sizeof(addr));
+		if (ret_b < 0) {
+			perror("bind");
+			return 1;
+		}
+	
+		int ret_l = listen(sock, SOMAXCONN);
+		if (ret_l < 0) {
+			perror("listen");
+			return 1;
+		}
+	
+		while(1) {
+			int cli_sock = accept(sock, NULL, NULL);
+			if (cli_sock < 0) {
+				perror("accept");
+				return 1;
+			}
+	
+			char buf[1024] = {0};
+	
+			int read_size = read(cli_sock, buf, sizeof(buf));
+			if (read_size < 0) {
+				perror("read");
+				return 1;
+			}
+	
+			char *res;
+			if (strstr(buf, "GET / HTTP/1.1")) {
+				res = "HTTP/1.1 200 OK\r\nContent-Type: text/html\r\n\r\n&lt;html&gt;&lt;h1&gt;helloworld&lt;/h1&gt;&lt;/html&gt;\r\n\r\n";
+			}
+			else if (strstr(buf, "GET /close HTTP/1.1")) {
+				break;
+			}
+			else {
+				res ="HTTP/1.1 404 Not Found\r\nContent-Type: text/html\r\n\r\n&lt;html&gt;&lt;h1&gt;404 Not Found&lt;/h1&gt;&lt;/html&gt;\r\n\r\n";
+			}
+			write(cli_sock, res, strlen(res));
+	
+			close(cli_sock);
+		}
+		close(sock);
+		printf("Server closed\n");
+	
+		return ;
+	}
+</pre>
+</div>
+	<br>
+	<br>
+	<h3>1. socket 함수</h3>
+	<h3>int socket(int domain, int type, int protocol);</h3>
+	<b>int domain:</b> 어떤 영역에서 통신할 것인지에 대한 영역을 지정<br>
+	AF_UNIX는 프로세스끼리 통신, AF_INET은 IPv4, AF_INET6는 IPv6를 의미<br>
+	<br>
+	<b>int type:</b> 어떤 서비스 타입의 소켓을 생성할건지 지정<br>
+	SOCK_STREAM(TCP), SOCK_DGRAM(UDP), SOCK_RAW(Raw 방식 TCP나 UDP를 거치지 않고 바로 IP계층 사용 시)<br>
+	<br>
+	<b>int protocol:</b> 소켓에서 사용할 프로토콜 지정<br>
+	IPPROTO_TCP, IPPROTO_UDP, 0: type에서 미리 정해진 경우<br>
+	</p>
+	<br>
+
+	<h3>2. bind 함수</h3>
+	<h3>int bind(int sockfd, struct sockaddr *myaddr, socklen_t addrlen);</h3>
+	<b>int sockfd:</b> 함수 리턴값으로 받은 소켓 디스크립터 (fd는 파일디스크립터의 약자)<br>
+	<br>
+	<b>struct sockaddr *myaddr:</b> 서버의 IP주소<br>
+	<br>
+	<b>socklen_t addrlen:</b> 주소 길이<br>
+	</p>
+	<br>
+
+	<h3>3. listen 함수</h3>
+	<h3>int listen(int sockfd, int backlog);</h3>
+	<b>int sockfd:</b> 소켓 디스크립터<br>
+	<br>
+	<b>int backlog:</b> 연결 대기열의 크기<br>
+	</p>
+	<br>
+
+	<h3>4. read 함수</h3>
+	<h3>ssize_t read(int fd, void *buf, size_t count);</h3>
+	read 함수는 파일(여기서는 소켓)에서 count 크기 만큼의 데이터를 읽어서 buf에 저장하는 일을 한다.<br>
+	<br>
+	<b>int fd:</b>  열린 파일의 지정 번호, 소켓 프로그램에서는 fd 소켓 지정번호<br>
+	<br>
+	<b>void *buf:</b> 읽어들인 데이터가 저장될 버퍼 변수<br>
+	<br>
+	<b>size_t count:</b> 읽어들일 데이터의 count 크기<br>
+	<br>
+
+	<h3>5. write 함수</h3>
+	<h3>ssize_t write(int fd, const void *buf, size_t count);</h3>
+	write 함수는 buf에서 count 크기만큼의 데이터를 파일 fd에 작성하는 일을 한다.<br>
+	<br>
+	<b>int fd:</b>  열린 파일의 지정 번호, 소켓 프로그램에서는 fd 소켓 지정번호<br>
+	<br>
+	<b>void *buf:</b> 읽어들인 데이터가 저장될 버퍼 변수<br>
+	<br>
+	<b>size_t count:</b> 읽어들일 데이터의 count 크기<br>
+	<br>
+
+	<h3>6. close 함수</h3>
+	<h3>int close(int socket_fd);</h3>
+
+	write 함수는 buf에서 count 크기만큼의 데이터를 파일 fd에 작성하는 일을 한다
+	성공하면 0을, 실패하면 -1을 반환한다.<br>
+	<br>
+	close()함수는 매개변수로 전달된 socket_fd 소켓의 참조 카운터를 1 감소시키며 참조 카운터가 0이 되면 해당 소켓을 종료한다.
+	소켓을 종료하면서 동시에 recv buffer와 send buffer를 차단하기 때문에 close함수를 통해 소켓이 종료되고 난 시점 이후 부터는 더이상 통신을 주고받을 수가 없다<br>
+	<br>
+
+	<h3>7. connect 함수</h3>
+	<h3>int connect(sock, (struct sockaddr *)&addr, sizeof(addr))</h3>
+	<b>int fd:</b>소켓 디스크럽터<br>
+	<br>
+	<b>(struct sockaddr *)&addr:</b> 실제로 접속하고자 하는 IP와 PORT 정보가 있는
+	sockaddr 구조체<br>
+	<br>
+	<b>sizeof(addr):</b> sockaddr 구조체의 크기<br>
+
+	connect() 함수가 호출되고
+
+	연결하려는 대상과의 연결이
+	
+	성공하면 0을 리턴하고
+	
+	실패하면 0보다 작은 값을 리턴합니다.<br>
+	</p>
+	<br>
+	<br>
+	<br>
+
+	<p>
+	<h2 id="파일 디스크립터(소켓)"><span class ="sub">파일 디스크립터(소켓)</span></h2>
+	<br>
+	파일 디스크립터(File Descriptor)란 리눅스 혹은 유닉스 계열의 시스템에서 프로세스(process)가 파일(file)을 다룰 때 사용하는 개념으로, 
+	프로세스에서 특정 파일에 접근할 때 사용하는 추상적인 값이다. <br>
+	<br>
+	파일 디스크럽터는 일반적으로 0이 아닌 정수값을 갖는다. 흔히 유닉스 시스템에서 모든 것을 파일이라고 한다. 
+	일반적인 정규파일부터 디렉토리, 소켓, 파이프, 블록 디바이스, 케릭터 디바이스 등 모든 객체들을 파일로 관리한다. 
+	유닉스 시스템에서 프로세스가 이 파일들을 접근할 때 파일 디스크립터라는 개념일 이용한다. 
+	프로세스가 실행 중에 파일을 Open하면 커널은 해당 프로세스의 파일 디스크립터 숫자 중 사용하지 않는 가장 작은 값을 할당해준다. 
+	그 다음 프로세스가 열려있는 파일에 시스템 콜을 이용해서 접근할 때, 파일 디스크립터(FD)값을 이용해서 파일을 지칭할 수 있다.<br>
+	<br>
+	프로그램이 프로세스로 메모리에서 실행될 때, 기본적으로 할당되는 파일디스크립터는 표준입력(Standard Input), 표준 출력(Standard Output), 표준에러(Standard Error)이며 이들에게 각각 0, 1, 2라는 정수가 할당된다.<br>	
+	file descriptors 테이블의 각 항목은 FD 플래그와 파일 테이블로의 포인터를 가지고 있다.
+	이 포인터를 이용하여 FD 를 통해 시스템의 파일을 참조 할 수 있는 것이다.
+	프로세스는 이런 FD 테이블과 파일 테이블의 정보를 직접 고칠 수 없으며, 반드시 커널을 통해서 수정을 해야 한다.<br>
+	</p>
+	<br>
+	<br>
+	
+
+	<p>
+	<h2 id="http 요청(+헤더) 과 응답(+헤더)"><span class ="sub">http 요청(+헤더) 과 응답(+헤더)</span></h2>
+	HTTP Header는 클라이언트와 서버가 요청 또는 응답으로 부가적인 정보를 전송하는 것 헤더는 크게 4가지로 분류할 수 있다.
+	General Header(공통 헤더),
+	Request Header(요청 헤더),
+	Response Header(응답 헤더),
+	Entity Header(엔티티 헤더)
+	<br>
+	<h3>http 요청</h3>
+	HTTP 요청에서 사용되지만 메시지의 컨텐츠와 관련이 없는 패치될 리소스나 클라이언트 자체에 대한 자세한 정보를 포함하는 헤더<br>
+	<br>
+	Host : 요청하려는 서버 호스트 이름과 포트번호<br>
+	User-agent : 클라이언트 프로그램 정보 ex) Mozilla/4.0, Windows NT5.1<br>
+	Referer : 현재 페이지로 연결되는 링크가 있던 이전 웹 페이지의 주소<br>
+	Accept : 클라이언트가 처리 가능한 MIME Type 종류 나열<br>
+	Accept-charset : 클라이언트가 지원가능한 문자열 인코딩 방식<br>
+	Accept-language : 클라이언트가 지원가능한 언어 나열<br>
+	Accept-encoding : 클라이언트가 해석가능한 압축 방식 지정<br>
+	If-Modified-Since : 여기에 쓰여진 시간 이후로 변경된 리소스 취득. 캐시가 만료되었을 때에만 데이터를 전송하는데 사용<br>
+	Authorization : 인증 토큰을 서버로 보낼 때 쓰이는 헤더<br>
+	Origin : 서버로 Post 요청을 보낼 때 요청이 어느 주소에서 시작되었는지 나타내는 값. 경로 정보는 포함하지 않고 서버 이름만 포함<br>
+	이 값으로 요청을 보낸 주소와 받는 주소가 다르면 CORS 에러가 난다.<br>
+	Cookie : 쿠기 값 key-value로 표현된다. Set-Cookie 헤더와 함께 서버로부터 이전에 전송됐던 저장된 HTTP 쿠키를 포함<br>
+	<br>
+
+	<h3>http 응답</h3> 
+	위치 또는 서버 자체에 대한 정보(이름, 버전)과 같이 응답에 대한 부가적인 정보를 갖는 헤더<br>
+	<br>
+	Server : 웹서버의 종류<br>
+	Age : max-age 시간내에서 얼마나 흘렀는지 초 단위로 알려주는 값<br>
+	Referrer-policy : 서버 referrer 정책을 알려주는 값 ex) origin, no-referrer, unsafe-url<br>
+	WWW-Authenticate : 사용자 인증이 필요한 자원을 요구할 시, 서버가 제공하는 인증 방식<br>
+	Proxy-Authenticate : 요청한 서버가 프록시 서버인 경우 유저 인증을 위한 값<br>
+	Set-Cookie : 서버측에서 클라이언트에게 세션 쿠키 정보를 설정 (RFC 2965에서 규정)<br>
+
+	</p>
+	<br>
+	<br>
+	<p>
+	<h2 id="리눅스 select"><span class ="sub">리눅스 select</span></h2>
+	<br>
+	'다중 입출력'은 프로그램(단일 스레드)에서 여러 개의 파일을 작업하고자 할 때 사용할 수 있는 메커니즘이다.
+	'select'는 '블록/비동기적 입출력'에서의 '다중 입출력' 모델을 말한다.
+
+	순서대로 작업할게 아니라 작업할 준비가 된 파일에 대해서만 작업을 하면 된다. 
+	이러한 생각이 시초가 되어 최초로 탄생한 함수가 'select' 시스템콜이다.
+
+	<div class ="code">
+<pre>
+int select(int n,
+fd_set* readfds,
+fd_set* writefds,
+fd_set* exceptfds,
+struct timeval* timeout);
+
+FD_CLR(int fd, fd_set* set);
+FD_ISSET(int fd, fd_set* set);
+FD_SET(int fd, fd_set* set);
+FD_ZERO(fd_set* set);
+</pre>
+		</div>
+	
+	<br>
+	'select()'는 해당 파일 디스크립터가 입출력을 수행할 준비가 되거나 마지막 매개변수인 timeout 변수에 정해진 시간이 경과할 때까지만 '블록'된다.
+	'감시 대상 파일 디스크립터'는 3가지 집합으로 나뉘어 각각 다른 '이벤트'를 기다린다.<br>
+	<br>
+	readfds: '읽기'가 가능한지 감시 (블록되지 않고 read() 작업이 가능한지)<br>
+
+	writefds: '쓰기'가 가능한지 감시 (블록되지 않고 write() 작업이 가능한지)<br>
+
+	exceptfds: 예외가 발생했거나 대역을 넘어서는 데이터(소켓)가 존재하는지 감시<br>
+
+	</p>
+	<br>
+	<br>
+
+	<p>
+	<h2 id="리눅스 epoll"><span class ="sub">리눅스 epoll</span></h2>
+	<br>
+	네트워크 트래픽이 증가함에 따라, 서버에 접속하는 사용자들수도 많아 졌다.
+	이런 사용자들은 보통 하나의 세션이 될 것이고, 사용자가 많아지면, 서버는 이 사용자들이 접속한 세션들을 관리해야 한다.
+	이런 세션들을 관리하기 위해서 epoll을 사용한다.<br>
+
+	(select의 경우 fd_set 구조체에 fd를 등록하여 싱글 쓰레드로 이벤트를 감지한다. fd_set는 bitmask이기 때문에 최대 1024개까지만 등록할 수 있다)<br>
+	<br>
+	1. level-triggered(LT) : 특정 상태가 유지되는 동안 감지<br>
+
+	2. edge-triggered(ET) : 특정 상태가 변화하는 시점에서만 감지<br>
+
+	</p>
+	<br>
+	<br>
+
+	<p>
+	<h2 id="블로킹과 논블로킹"><span class ="sub">블로킹과 논블로킹</span></h2>
+	<br>
+	<h3>블로킹</h3> 
+	호출된 함수가 자신의 작업이 종료될 때까지 제어권을 갖고 있는 것을 말한다.
+	즉, 호출된 함수의 작업이 종료될 때까지 호출하는 함수는 다른 작업을 진행할 수 없다.<br>
+	<h3>논블로킹</h3> 
+	논블로킹은 호출된 함수가 자신의 작업이 종료되지 않았더라도 함수의 제어권을 자신을 호출하는 함수로 바로 넘겨주는 것을 말한다.<br>
+
+	블로킹과 논블로킹은 호출된 함수의 제어권과 관련이 있다.
+	</p>
+	<br><br>
+	
+<p>
+	<h2 id="로드 밸런싱"><span class ="sub">로드 밸런싱</span></h2>
+	<br>
+	로드 밸런싱은 애플리케이션을 지원하는 리소스 풀 전체에 네트워크 트래픽을 균등하게 배포하는 방법이다.<br>
+	최신 애플리케이션은 수백만 명의 사용자를 동시에 처리하고 정확한 텍스트, 비디오, 이미지 및 기타 데이터를 빠르고 안정적인 방식으로 각 사용자에게 반환해야 한다.
+	이렇게 많은 양의 트래픽을 처리하기 위해 대부분의 애플리케이션에는 데이터가 중복되는 리소스 서버가 많이 있다. 
+	로드 밸런서는 사용자와 서버 그룹 사이에 위치하며 보이지 않는 촉진자 역할을 하여 모든 리소스 서버가 동일하게 사용되도록 하는 디바이스이다.<br>
+	<br>
+	<br>
+	<br>
+
+	</p>
+
+	<a href="#처음으로" style="background-color: rgb(105, 102, 118); color: rgb(255, 255, 255)">처음으로</a><br><br>
+	<br>
+	<br>
+</div>
+</div>
+</body>
+</html>
