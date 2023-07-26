@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>정원모집</title>
+	<link type="text/css" rel="stylesheet" href="./login.css">
+    <link rel='stylesheet' type='text/css' href='./css/board.css'>
+
+	<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />	
+</head>
+
+<body>
+
+	<div id="wrap">
+        <div id="header">
+            <div id="header_in">
+                <h1 id="logo">
+                    <a href="#"><img src="./imege/_logo.png"/></a>
+                </h1>
+
+                <nav id="login_">
+                    <ul>
+                        <li><a href="#">로그인</a></li>
+                        <li><a href="#">예약확인</a></li>
+                        <li><a href="#">고객센터</a></li>
+                    </ul>
+                </nav>
+
+            </div>
+
+            <div id="gnb">
+                <ul>
+                    <li><a href="#">패키지여행</a></li>
+                    <li><a href="#">테마여행</a></li>
+                    <li><a href="#">국내</a></li>
+                    <li><a href="#">국외</a></li>
+                    <li><a href="#">추천</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="login-outer">
+            <div class="login-wrapper">
+                <h2>Login</h2>
+                <form method="post" action="서버의url" id="login-form">
+                    <input type="text" name="userName" placeholder="Email">
+                    <input type="password" name="userPassword" placeholder="Password">
+
+                    <div class="remember-wrapper">
+                        <label for="remember-check">
+                            <input type="checkbox" id="remember-check"> 아이디 저장하기
+                        </label>
+                    </div>
+
+                    <input type="submit" value="Login">
+                </form>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
