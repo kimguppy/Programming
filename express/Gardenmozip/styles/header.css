@@ -1,0 +1,74 @@
+/* css style sheet */
+
+*{
+  margin:0;
+  padding:0;
+}
+ul,li{list-style: none;}
+a{text-decoration:none;
+  color: rgb(70, 70, 70);}
+
+a:visited {  color: rgb(70, 70, 70);}
+
+
+button{all: unset;}
+
+body{
+  margin: 0 auto;
+  width: 1280px;
+}
+
+
+header{
+  margin: 0 auto;
+}
+
+#header_in{
+  margin: 50px 20px auto;
+  display: flex;
+}
+
+
+#login_ {
+  padding: 0 20px 0;
+  width: 1000px ;
+  text-align: right;
+}
+
+#logo{
+  padding:0 20px 0;
+  text-align: left;
+}
+
+#login_ > ul > li{
+  display:inline-block;
+  margin: 0 10px ;
+}
+
+#login_ > ul > li > a{
+  font-size:10px;
+  font-weight: bold;
+  display:inline-block;
+  margin: 0 10px 0;
+}
+
+
+#gnb{
+  margin: 0 auto;
+  text-align: center;
+}
+
+#gnb > ul > li{
+  display:inline-block;
+}
+
+#gnb > ul > li > a{
+  font-size:19px;
+  color:#004385;
+  font-weight: bold;
+  width:200px;
+  display:inline-block;
+  text-align: center;
+  margin: 30px 20px 30px 20px;
+}
+

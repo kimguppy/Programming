@@ -1,0 +1,138 @@
+-- MySQL Workbench Forward Engineering
+
+SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
+SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
+SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
+
+-- -----------------------------------------------------
+-- Schema garden
+-- -----------------------------------------------------
+CREATE SCHEMA IF NOT EXISTS `garden` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci ;
+USE `garden` ;
+
+-- -----------------------------------------------------
+-- Table `garden`.`building_information`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `garden`.`building_information` (
+  `name` INT NOT NULL,
+  `address` VARCHAR(50) NULL DEFAULT NULL,
+  PRIMARY KEY (`name`),
+  UNIQUE INDEX `name_UNIQUE` (`name` ASC) VISIBLE)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+
+
+-- -----------------------------------------------------
+-- Table `garden`.`Department_information`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `garden`.`Department_information` (
+  `Department` VARCHAR(50) NOT NULL,
+  `building` INT NULL DEFAULT NULL,
+  PRIMARY KEY (`Department`),
+  INDEX `building_idx` (`building` ASC) VISIBLE,
+  UNIQUE INDEX `Department_UNIQUE` (`Department` ASC) VISIBLE,
+  CONSTRAINT `building`
+    FOREIGN KEY (`building`)
+    REFERENCES `garden`.`building_information` (`name`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+
+
+-- -----------------------------------------------------
+-- Table `garden`.`professor_information`
+-- -----------------------------------------------------
+
+CREATE TABLE IF NOT EXISTS `garden`.`professor_information` (
+  `name` VARCHAR(20) NOT NULL,
+  `department` VARCHAR(20) NOT NULL,
+  PRIMARY KEY (`name`),
+  UNIQUE INDEX `name_UNIQUE` (`name` ASC) VISIBLE)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+
+
+-- -----------------------------------------------------
+-- Table `garden`.`assistant_information`
+-- -----------------------------------------------------
+
+CREATE TABLE IF NOT EXISTS `garden`.`assistant_information` (
+  `Professor_in_charge` VARCHAR(20) NULL DEFAULT NULL,
+  `name` VARCHAR(20) NOT NULL,
+  `Department` VARCHAR(50) NULL DEFAULT NULL,
+  PRIMARY KEY (`name`),
+  INDEX `pro_idx` (`Professor_in_charge` ASC) VISIBLE,
+  INDEX `de_idx` (`Department` ASC) VISIBLE,
+  UNIQUE INDEX `name_UNIQUE` (`name` ASC) VISIBLE,
+  UNIQUE INDEX `Professor_in_charge_UNIQUE` (`Professor_in_charge` ASC) VISIBLE,
+  CONSTRAINT `pro`
+    FOREIGN KEY (`Professor_in_charge`)
+    REFERENCES `garden`.`professor_information` (`name`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `de`
+    FOREIGN KEY (`Department`)
+    REFERENCES `garden`.`Department_information` (`Department`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+
+
+-- -----------------------------------------------------
+-- Table `garden`.`class_information`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `garden`.`class_information` (
+  `professor` VARCHAR(50) NOT NULL,
+  `building` INT NOT NULL,
+  `class` VARCHAR(50) NOT NULL,
+  PRIMARY KEY (`class`),
+  INDEX `professor_idx` (`professor` ASC) VISIBLE,
+  INDEX `building_idx` (`building` ASC) VISIBLE,
+  UNIQUE INDEX `class_UNIQUE` (`class` ASC) VISIBLE,
+  CONSTRAINT `professor`
+    FOREIGN KEY (`professor`)
+    REFERENCES `garden`.`professor_information` (`name`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `building`
+    FOREIGN KEY (`building`)
+    REFERENCES `garden`.`building_information` (`name`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+
+
+-- -----------------------------------------------------
+-- Table `garden`.`student`
+-- -----------------------------------------------------
+
+CREATE TABLE IF NOT EXISTS `garden`.`student` (
+  `student_ID` INT NOT NULL,
+  `department` VARCHAR(20) NULL DEFAULT NULL,
+  `name` VARCHAR(20) NULL DEFAULT NULL,
+  PRIMARY KEY (`student_ID`),
+  INDEX `department_idx` (`department` ASC) VISIBLE,
+  UNIQUE INDEX `student_ID_UNIQUE` (`student_ID` ASC) VISIBLE,
+  CONSTRAINT `department`
+    FOREIGN KEY (`department`)
+    REFERENCES `garden`.`Department_information` (`Department`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+
+
+SET SQL_MODE=@OLD_SQL_MODE;
+SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+
+

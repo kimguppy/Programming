@@ -1,0 +1,43 @@
+
+
+.outer {
+  text-align: center;
+  display: inline-block;
+  position : relative;
+  width: 1280px;
+  height: 600px;
+  margin: 0 auto;
+  overflow-x: hidden;
+}
+
+.inner-list {
+  display: flex;
+  transition: .3s ease-out;
+  height: 100%;
+  width: 100%;
+}
+
+.inner {
+  height: 100%;
+  width: 100%;
+  padding: 0 16px;
+  background-color: #7b7b7b;
+}
+
+.button-left {
+  position: absolute;
+  top: 50%;
+  transform: translate(0, -50%);
+  font-size:100px;
+  color:#ffffff;
+  left : 70px; 
+}
+
+.button-right {
+  position: absolute;
+  top: 50%;
+  transform: translate( 0, -50%);
+  font-size:100px;
+  color:#ffffff;
+  right : 70px;
+}
