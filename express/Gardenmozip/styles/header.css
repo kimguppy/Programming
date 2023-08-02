@@ -13,6 +13,12 @@ a:visited {  color: rgb(70, 70, 70);}
 
 button{all: unset;}
 
+.button{
+  border: 0;
+  background-color: transparent;
+}
+
+
 body{
   margin: 0 auto;
   width: 1280px;
@@ -65,6 +71,16 @@ header{
 #gnb > ul > li > a{
   font-size:19px;
   color:#004385;
+  font-weight: bold;
+  width:200px;
+  display:inline-block;
+  text-align: center;
+  margin: 30px 20px 30px 20px;
+}
+
+#gnb > ul > li > input{
+  font-size:19px;
+  color:#850000;
   font-weight: bold;
   width:200px;
   display:inline-block;

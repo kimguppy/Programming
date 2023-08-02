@@ -7,7 +7,7 @@
 <header>
     <div id="header_in">
         <h1 id="logo">
-            <a href="#"><img src="/images/_logo.png"/></a>
+            <img src="/images/_logo.png"/>
         </h1>
 
         <nav id="login_">
@@ -22,9 +22,20 @@
 
     <div id="gnb">
         <ul>
-            <li><a href="/package.html">패키지여행</a></li>
-            <script src="/index.js"></script>
-            <li><a href="#">테마여행</a></li>
+            <li><input class= "button" type = "button" value= "패키지여행" onclick= "movepage()"></a></li>
+            <script type= "text/javascript">
+                function movepage() {
+                    location.href = "/package"
+                }
+            </script>
+
+            <li><input class= "button" type = "button" value= "테마여행" onclick= "movepage()"></a></li>
+            <script type= "text/javascript">
+                function movepage() {
+                    location.href = "/package"
+                }
+            </script>
+
             <li><a href="#">국내여행</a></li>
             <li><a href="#">국외여행</a></li>
         </ul>
