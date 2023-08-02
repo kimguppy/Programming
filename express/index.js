@@ -38,6 +38,10 @@ app.get('/header', (_req, res) => {
 	res.sendFile(filePath);
 });
 
+app.get('/package', (_req, res) => {
+    const filePath = path.join(__dirname, 'Gardenmozip', '/package.html');
+	res.sendFile(filePath);
+});
 
 app.get('/', (_req, res) => {
 	const filePath = path.join(__dirname, 'Gardenmozip/', 'main.html');
