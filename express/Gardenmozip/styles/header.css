@@ -5,33 +5,48 @@
   padding:0;
 }
 ul,li{list-style: none;}
-a{text-decoration:none;
-  color: rgb(70, 70, 70);}
-
-a:visited {  color: rgb(70, 70, 70);}
-
+h1 {
+  font-weight: bold; /* 제목 글꼴 굵게 지정 */
+  color: rgb(28, 30, 30);
+}
 
 button{all: unset;}
 
-.button{
+.menubut{
   border: 0;
+  color: rgb(70, 70, 70);
+  background-color: transparent;
+}
+
+.mybut{
+  border: 0;
+  color: rgb(232, 232, 232);
   background-color: transparent;
 }
 
 
 body{
   margin: 0 auto;
+}
+
+section{
+  margin: 0 auto;
   width: 1280px;
 }
 
-
 header{
+  height: 345px;
+  width: 100%;
   margin: 0 auto;
 }
 
 #header_in{
-  margin: 50px 20px auto;
+  text-align: center;
+  width: 1280px;
+  margin: 0 auto 120px ; /* 위 아래 50px, 좌우 auto */
   display: flex;
+  padding: 50px 0 0 0;
+  
 }
 
 
@@ -46,20 +61,25 @@ header{
   text-align: left;
 }
 
-#login_ > ul > li{
+#login_ > ul > li {
   display:inline-block;
-  margin: 0 10px ;
 }
 
-#login_ > ul > li > a{
-  font-size:10px;
+#login_ > ul > li > input{
+  color:#ffffff;
+  margin: 0 10px ;
   font-weight: bold;
-  display:inline-block;
-  margin: 0 10px 0;
+  text-shadow: 1px 1px 2px rgb(6, 62, 65);
+}
+
+.menu{
+  width: 100%;
+  background-color:rgb(42, 82, 81);
 }
 
 
 #gnb{
+  width: 1280px;
   margin: 0 auto;
   text-align: center;
 }
@@ -68,19 +88,11 @@ header{
   display:inline-block;
 }
 
-#gnb > ul > li > a{
-  font-size:19px;
-  color:#004385;
-  font-weight: bold;
-  width:200px;
-  display:inline-block;
-  text-align: center;
-  margin: 30px 20px 30px 20px;
-}
 
 #gnb > ul > li > input{
   font-size:19px;
-  color:#850000;
+  color:#e0dede;
+  text-shadow: 1px 1px 2px rgb(2, 26, 27);
   font-weight: bold;
   width:200px;
   display:inline-block;

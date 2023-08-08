@@ -4,41 +4,79 @@
 </head>
 
 <body>
-<header>
+<header style="background-image: url('/images/배경.jpg');" background-position: 20px;>
     <div id="header_in">
-        <h1 id="logo">
-            <img src="/images/_logo.png"/>
-        </h1>
+        
+    <button class="mybut" onclick="movepagemain()">
+        <img src="/images/_logo.png" alt="Logo">
+    </button>
+    
+    <script type="text/javascript">
+        function movepagemain() {
+        location.href = "/";
+        }
+    </script>
 
         <nav id="login_">
             <ul>
-                <li><a href="#">로그인</a></li>
-                <li><a href="#">예약확인</a></li>
-                <li><a href="#">고객센터</a></li>
+                <li><input class= "mybut" type = "button"  value= "로그인" onclick= "movepagelogin()"></li>
+                <script type= "text/javascript">
+                    function movepagelogin() {
+                        location.href = "/login"
+                    }
+                </script>
+                <li><input class= "mybut" type = "button" value= "마이페이지" onclick= "movepagemypage()"></li>
+                <script type= "text/javascript">
+                    function movepagemypage() {
+                        location.href = "/mypage"
+                    }
+                </script>
+                <li><input class= "mybut" type = "button" value= "고객센터" onclick= "movepagecenter()"></li>
+                <script type= "text/javascript">
+                    function movepagecenter() {
+                        location.href = "/center"
+                    }
+                </script>
+
             </ul>
         </nav>
 
     </div>
 
-    <div id="gnb">
-        <ul>
-            <li><input class= "button" type = "button" value= "패키지여행" onclick= "movepage()"></a></li>
-            <script type= "text/javascript">
-                function movepage() {
-                    location.href = "/package"
-                }
-            </script>
+    <div class="menu">
+        <div id="gnb">
+            <ul>
+                <li><input class= "menubut" type = "button" value= "패키지여행" onclick= "movepagepackage()"></li>
+                <script type= "text/javascript">
+                    function movepagepackage() {
+                        location.href = "/package"
+                    }
+                </script>
 
-            <li><input class= "button" type = "button" value= "테마여행" onclick= "movepage()"></a></li>
-            <script type= "text/javascript">
-                function movepage() {
-                    location.href = "/package"
-                }
-            </script>
+                <li><input class= "menubut" type = "button" value= "테마여행" onclick= "movepagethema()"></li>
+                <script type= "text/javascript">
+                    function movepagethema() {
+                        location.href = "/thema"
+                    }
+                </script>
 
-            <li><a href="#">국내여행</a></li>
-            <li><a href="#">국외여행</a></li>
-        </ul>
+
+                <li><input class= "menubut" type = "button" value= "휴양지" onclick= "movepagevacation()"></li>
+                <script type= "text/javascript">
+                    function movepagevacation() {
+                        location.href = "/vacation"
+                    }
+                </script>
+
+                <li><input class= "menubut" type = "button" value= "여관 / 마굿간" onclick= "movepagehotel()"></li>
+                <script type= "text/javascript">
+                    function movepagehotel() {
+                        location.href = "/hotel"
+                    }
+                </script>
+            </ul>
+        </div>
+
     </div>
 </header>
 </body>`

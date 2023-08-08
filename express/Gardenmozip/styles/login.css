@@ -1,93 +1,4 @@
 
-*{
-    margin:0;
-    padding:0;
-}
-
-ul,li{
-    list-style: none;
-}
-
-a{
-    text-decoration:none;
-    }
-
-button{
-        all: unset;
-    }
-
-body{
-    margin: 0 auto;
-    width: 1200px;
-    font-size: 14px;
-    font-family: 'Roboto', sans-serif;
-    }
-
-#wrap{
-    display:inline-block;
-    }
-
-#header{
-    text-align: center;
-    padding:0 auto;
-}
-
-#header_in{
-    display: flex;
-    padding:0 auto;
-}
-
-
-
-#login_ {
-    
-    padding:5px 20px 0;
-    padding:0 auto;
-    width: 920px ;
-    text-align: right;
-}
-
-#logo{
-    padding:50px 20px 0;
-    text-align: left;
-}
-
-#login_ > ul > li{
-    display:inline-block;
-    margin: 0 10px ;
-}
-
-#login_ > ul > li > a{
-    font-size:10px;
-    color:#7b7b7b;
-    font-weight: bold;
-    display:inline-block;
-    margin: 40px 0;
-}
-
-
-#gnb{
-    display:inline-block;
-    
-    text-align: center;
-    padding:0px 20px 5px;
-}
-
-#gnb > ul > li{
-    display:inline-block
-}
-
-#gnb > ul > li > a{
-    font-size:19px;
-    color:#004385;
-    font-weight: bold;
-    width:180px;
-    display:inline-block;
-    margin:40px 0;
-}
-
-
-
 .login-wrapper{
     display:inline-block;
     width: 400px;
@@ -105,7 +16,7 @@ body{
 
 .login-wrapper > h2{
     font-size: 24px;
-    color:#404040;
+    color :rgb(42, 82, 81);
     margin-bottom: 20px;
 
     
@@ -127,7 +38,7 @@ body{
 #login-form > input[type="submit"]{
     color: #fff;
     font-size: 16px;
-    background-color: #404040;
+    background-color:rgb(42, 82, 81);
     margin-top: 20px;
 }
 

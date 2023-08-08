@@ -1,0 +1,88 @@
+
+@import url(https://fonts.googleapis.com/css?family=Noto+Serif+KR:300,700);
+@import url(https://fonts.googleapis.com/css?family=Noto+Sans+KR:700);
+
+
+*, *:before, *:after {
+box-sizing: border-box;
+}
+
+h1, h2, h3, h4, h5, h6 {
+margin: 0;
+word-break: keep-all;
+}
+h6 {
+font-size: 15px;
+color: #666;
+font-weight: 700;
+line-height: 30px;
+}
+h6 a{
+color: #666;
+}
+h1 {
+font-weight: normal;
+font-size: 27px;
+}
+p {
+line-height: 26px;
+padding-top: 15px;
+font-size: 15px;
+word-break: keep-all;
+}
+a {
+color: #000;
+text-decoration: none;
+border-bottom: 1px solid #ccc;
+}
+
+.table {
+padding:5%;
+width: 1280px;
+border-bottom: 1px solid #eee;
+background-color:#eee3;
+margin-bottom: 10%;
+}
+.table-header {
+text-align: center;
+justify-content: center;
+font-family: 'Noto Sans KR', sans-serif;
+display: flex;
+margin: 0px auto 0px auto;
+width: 95%;
+background: #fff;
+}
+
+.table-row {
+margin: 0px auto 0px auto;
+width: 95%;
+text-align: center;
+display: flex;
+justify-content: center;
+height:auto;
+overflow: hidden;
+transition: all 0.3s ease-in-out;
+font-size: 15px;
+border-top: 1px solid #eee;
+}
+.table-data, .header_item {
+padding: 15px 0px;
+width: 10%;
+align-items: center; 
+}
+
+.num{
+  width: 13%;
+}
+.name{
+    width: 37%;
+}
+.location{
+    width: 35%;
+}
+.division{
+    width: 10%;
+}
+.lodgment{
+  width: 10%;
+}

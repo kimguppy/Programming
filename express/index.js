@@ -37,13 +37,47 @@ app.get('/header', (_req, res) => {
     const filePath = path.join(__dirname, 'Gardenmozip', '/header.html');
 	res.sendFile(filePath);
 });
+app.get('/footer', (_req, res) => {
+    const filePath = path.join(__dirname, 'Gardenmozip', '/footer.html');
+    res.sendFile(filePath);
+});
 
 app.get('/package', (_req, res) => {
     const filePath = path.join(__dirname, 'Gardenmozip', '/package.html');
 	res.sendFile(filePath);
 });
 
+app.get('/mypage', (_req, res) => {
+    const filePath = path.join(__dirname, 'Gardenmozip', '/mypage.html');
+	res.sendFile(filePath);
+});
+
+app.get('/thema', (_req, res) => {
+    const filePath = path.join(__dirname, 'Gardenmozip', '/thema.html');
+	res.sendFile(filePath);
+});
+
+app.get('/vacation', (_req, res) => {
+    const filePath = path.join(__dirname, 'Gardenmozip', '/vacation.html');
+	res.sendFile(filePath);
+});
+
+app.get('/hotel', (_req, res) => {
+    const filePath = path.join(__dirname, 'Gardenmozip', '/hotel.html');
+	res.sendFile(filePath);
+});
+
+app.get('/login', (_req, res) => {
+    const filePath = path.join(__dirname, 'Gardenmozip', '/login.html');
+	res.sendFile(filePath);
+});
+
+app.get('/center', (_req, res) => {
+    const filePath = path.join(__dirname, 'Gardenmozip', '/center.html');
+	res.sendFile(filePath);
+});
+
 app.get('/', (_req, res) => {
-	const filePath = path.join(__dirname, 'Gardenmozip/', 'main.html');
+	const filePath = path.join(__dirname, 'Gardenmozip', '/main.html');
 	res.sendFile(filePath);
 });

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>정원모집</title>
+    <link type="text/css" rel="stylesheet" href="/styles/vacation.css">
+
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            includeHTML();
+        });
+    </script>
+</head>
+
+<body>
+    <div id="header_container"></div>
+    <script>
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if(this.readyState == 4 && this.status == 200) {
+            document.getElementById("header_container").innerHTML = this.responseText;
+        }
+    };
+    xhttp.open("GET", "./header", true);
+    xhttp.send();
+    </script>
+
+<section>
+    <div class="promotion-container">
+        <img src="/images/prom2.jpg" width="1276" height="180" align-items: center; >
+    </div>
+    <br>
+    <br>
+
+    <div class="section_wrap">
+    <h1> [추천] 울창한 숲 휴양지 </h1> <br> <hr> <br>
+    <div class="gallery">
+        <div class="gallery_wrap">
+        <figure class="gallery__item">
+            <img src= "/images/헤브라남부.jpg" class="gallery__img" alt="Image 1">
+            <div class="content">
+                <span class="main"> [인기] 헤브라남부지방 돌기둥 유적 </span> <br>
+                <span class="price"> 450루비 ~ </span>
+            </div>
+        </figure>
+        <div class="button"type = "button" value= "장바구니에 담기">장바구니 담기</div>
+        </div>
+
+        <div class="gallery_wrap">
+        <figure class="gallery__item">
+            <img src= "/images/리토마을.jpg" class="gallery__img" alt="Image 2">
+            <div class="content">
+                <span class="main"> [특가] 리토마을 제비둥지 + 익스트림 레저 패키지</span> <br>
+                <span class="price"> 300루비 ~ </span>
+            </div>
+        </figure>
+        <div class="button"type = "button" value= "장바구니에 담기">장바구니 담기</div>
+        </div>
+        <div class="gallery_wrap">
+            <figure class="gallery__item">
+                <img src= "/images/시자기마을.jpg" class="gallery__img" alt="Image 2">
+                <div class="content">
+                    <span class="main"> [특가] 시자기마을 문화체험 </span> <br>
+                    <span class="price"> 300루비 ~ </span>
+                </div>
+            </figure>
+            <div class="button"type = "button" value= "장바구니에 담기">장바구니 담기</div>
+            </div>
+
+    </div>
+    <br><br>
+    <div class="section_wrap">
+    <h1> [추천] 시원한 바다 휴양지 </h1> <br> <hr> <br>
+    <div class="gallery">
+        <div class="gallery_wrap">
+        <figure class="gallery__item">
+            <img src= "/images/조라의마을.jpg" class="gallery__img" alt="Image 1">
+            <div class="content">
+                <span class="main"> [베스트]  조라의 마을 생선여관 + 수상레저 패키지 </span> <br>
+                <span class="price"> 450루비 ~ </span>
+            </div>
+        </figure>
+        <div class="button"type = "button" value= "장바구니에 담기">장바구니 담기</div>
+        </div>
+
+        <div class="gallery_wrap">
+        <figure class="gallery__item">
+            <img src= "/images/라넬습원.jpg" class="gallery__img" alt="Image 2">
+            <div class="content">
+                <span class="main"> [특가] 습원지대 + 호롱 만</span> <br>
+                <span class="price"> 300루비 ~ </span>
+            </div>
+        </figure>
+        <div class="button"type = "button" value= "장바구니에 담기">장바구니 담기</div>
+        </div>
+
+        <div class="gallery_wrap">
+            <figure class="gallery__item">
+                <img src= "/images/나크시마을.jpg" class="gallery__img" alt="Image 2">
+                <div class="content">
+                    <span class="main"> [특가] 나크시마을 유적 + 익스트림 레저 패키지</span> <br>
+                    <span class="price"> 300루비 ~ </span>
+                </div>
+            </figure>
+            <div class="button"type = "button" value= "장바구니에 담기">장바구니 담기</div>
+            </div>
+
+    </div>
+
+    </div>
+
+    <br>
+    <br>
+    <div id="footer_container"></div>
+    <script>
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if(this.readyState == 4 && this.status == 200) {
+            document.getElementById("footer_container").innerHTML = this.responseText;
+        }
+    };
+    xhttp.open("GET", "./footer", true);
+    xhttp.send();
+    </script>
+
+</section>
+</body>
+</html>
+
+<script src="scripts/navigation.js" type="text/javascript"></script>

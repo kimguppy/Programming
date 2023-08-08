@@ -1,0 +1,73 @@
+
+
+.section_wrap {
+  flex-direction: column;
+}
+
+.gallery {
+  display: flex;
+  justify-content: center; 
+}
+
+.gallery_wrap {
+  position: relative; 
+  height: 350px;
+  width: 400px;
+  display: flex;
+}
+
+.gallery__item {
+  height: 350px;
+  width: 400px;
+  align-items: center;
+  flex-direction: column;
+  display: flex;
+  margin: auto;
+  background-color: white;
+}
+
+.gallery__img {
+  height: 210px;
+  width: 360px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin: 20px;
+  flex-direction: row;
+}
+
+.content {
+  width: 360px;
+  height: 100px;
+  margin: 0px 20px 20px 20px;
+  flex-direction: row;
+}
+
+
+.gallery__item{
+  filter: brightness(1);
+}
+
+.gallery__item:hover {
+  filter: brightness(0.5);
+  transition: 0.2s;
+}
+
+.gallery_wrap .button {
+  position: absolute;
+  top: 50%; 
+  left: 50%; 
+  font-size: 22px;
+  padding: 8px 16px;
+  color: white;
+  cursor: pointer;
+  border: 2px solid white; 
+  display: none; 
+  transform: translate(-50%, -50%); /* 버튼을 가운데로 정렬 */
+  z-index: 1;
+}
+.gallery_wrap:hover .button { display: block; }
+
+.main { font-size: 15px;  color: black; justify-content: flex-start; }
+
+.price { font-size: 15px; color: black; justify-content: flex-end; }
