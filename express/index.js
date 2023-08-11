@@ -1,17 +1,19 @@
+#!/usr/bin/node
 const express = require('express');
 const path = require('path'); // path 모듈 불러오기
 const mysql = require('mysql');
 const dbconfig = require('./config/dbinfo.js');
 const connection = mysql.createConnection(dbconfig);
 const app = express();
+const cors = require('cors'); 
 const port = 3000;
 
-// app.get('/', (req, res) => {
-// 	connection.query('SELECT * FROM ex', (error, rows) => {
-// 		if (error) throw error;
-// 		res.send(rows);
-// 	});
-// });
+app.use(
+        cors({
+                origin: 'http://35.175.137.182:3000', // 여기서 따옴표 수정
+                credentials: true,
+        }));
+
 
 app.listen(port, () => {
 	console.log(`Example app listening http://localhost:${port}`);
