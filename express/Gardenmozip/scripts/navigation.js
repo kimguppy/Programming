@@ -30,6 +30,10 @@ function movepagecenter() {
     location.href = "/center";
 }
 
+function movepagejoin() {
+    location.href = "/join";
+}
+
 function movepagemain() {
     location.href = "/";
 }

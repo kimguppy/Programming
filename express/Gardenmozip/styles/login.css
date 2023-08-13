@@ -1,3 +1,4 @@
+button{all: unset;}
 
 .login-wrapper{
     display:inline-block;
@@ -42,28 +43,15 @@
     margin-top: 20px;
 }
 
-#login-form > input[type="checkbox"]{
-    display: none;
-    
-}
+button{all: unset;}
 
-.remember-wrapper {
+.Join-wrapper {
     display: flex;
     align-items: left; 
-    color: #999999;
+    color: #4e4e4e;
 }
-
-
-#login-form input[type="checkbox"] + label{
-    cursor: pointer;
-    padding-left: 26px;
-    background-image: url("checkbox.png");
-    background-repeat: no-repeat;
-    background-size: contain;
-    
-}
-#login-form input[type="checkbox"]:checked + label{
-    background-image: url("checkbox-active.png");
-    background-repeat: no-repeat;
-    background-size: contain;
+.Joinbut{
+    border: 0;
+    color: rgb(62, 62, 62); 
+    background-color: transparent;
 }

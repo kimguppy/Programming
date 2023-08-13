@@ -79,6 +79,11 @@ app.get('/center', (_req, res) => {
 	res.sendFile(filePath);
 });
 
+app.get('/join', (_req, res) => {
+    const filePath = path.join(__dirname, 'Gardenmozip', '/Join.html');
+	res.sendFile(filePath);
+});
+
 app.get('/', (_req, res) => {
 	const filePath = path.join(__dirname, 'Gardenmozip', '/main.html');
 	res.sendFile(filePath);

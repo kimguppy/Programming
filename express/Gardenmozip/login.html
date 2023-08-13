@@ -32,14 +32,16 @@
                             <input type="text" name="userName" placeholder="Email">
                             <input type="password" name="userPassword" placeholder="Password">
 
-                            <div class="remember-wrapper">
-                                <label for="remember-check">
-                                    <input type="checkbox" id="remember-check"> 아이디 저장하기
-                                </label>
-                            </div>
-
                             <input type="submit" value="Login">
                         </form>
+                        <div class="Join-wrapper">
+                            <input class= "Joinbut" type = "submit"  value= "아이디가 없으신가요?" onclick= "movepagejoin()">
+                            <script type= "text/javascript">
+                                    function movepagejoin() {
+                                    location.href = "/Join.html"
+                                    }
+                            </script>
+                        </div>
                 </div>
             </div>
 
