@@ -8,6 +8,10 @@ const app = express();
 const cors = require('cors'); 
 const port = 3000;
 
+const router = require('./Gardenmozip/scripts/login-router.js'); // 라우터 설정을 별도의 파일로 분리
+app.use('/', router);
+
+
 app.use(
         cors({
                 origin: 'http://35.175.137.182:3000', // 여기서 따옴표 수정

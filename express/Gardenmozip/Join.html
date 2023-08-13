@@ -3,9 +3,33 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>회원가입</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript">
+    function signup(){
+        var param = {};
+        param.userid = $("#id").val();
+        param.password = $("#password").val();
+        param.name = $("#name").val();
+        param.userid = $("#age").val();
+        param.password = $("#gender").val();
+        param.name = $("#email").val();
+        var ajax = $.ajax({
+                url: "/signup",
+                data: param,
+                type: 'POST',
+                dataType: "JSON",
+                success: function (result) {
+                        alert(result.msg);
+                        location.href = "/login.html";
+                }
+            });
+    }
+</script>
+
 </head>
+
+
 <body>
-<form name="Join" action="/scripts/check.php" method="post">
     <center>
     <table border=1>
     <tr>
@@ -28,12 +52,11 @@
     <tr><td>이메일 : </td><td><input type="text" name="email" size=30></td></tr>
     <tr>
     <td colspan="2" align=center>
-        <input type="submit" value="Login">
+        <input type="submit" value="회원가입"  onclick="signup();" >
     </td>
     </tr>
     
     </table>
     </center>
-</form>
 </body>
 </html>

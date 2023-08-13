@@ -12,4 +12,5 @@ $email = $_POST["email"];
 
 # insert sql 작성
 $sql = "INSERT INTO user (id, password, name, age, gender, email) VALUES('$id', '$password', '$name','$age', '$gender', '$email')";
+
 ?>
