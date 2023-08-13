@@ -5,7 +5,6 @@ var  express = require("express");
 var router = express.Router();
 
 var controller_main = require("./login-controller.js");
-
 /*
 // 로그인 라우터
 router.get("/login", function(req,res){
@@ -33,6 +32,15 @@ router.get("/logout", function(req,res){
 });
 
 */
+
+router.use(express.json());
+router.use(express.urlencoded({ extended: false }));
+
+
+router.get("/signup", function(req,res){
+    res.sendFile(path.join(__dirname , "./Join.html"));
+});
+
 router.post("/signup", async function(req,res){
    // 회원가입 컨트롤러 호출
     var result = await controller_main.SignUp(req,res);

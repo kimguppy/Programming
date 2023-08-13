@@ -64,6 +64,8 @@ exports.SignIn = async function(req){
 exports.SignUp = async function(req) {
      var resultcode = 0;
 
+     console.log("id:", id);
+     
      var conn = await pool.getConnection();    
 
      var id = req.body.id;
@@ -72,13 +74,6 @@ exports.SignUp = async function(req) {
      var age = req.body.age;
      var gender = req.body.gender;
      var email = req.body.email;
-
-     console.log("id:", id);
-     console.log("password:", password);
-     console.log("name:", name);
-     console.log("age:", age);
-     console.log("gender:", gender);
-     console.log("email:", email);
 
      var query = "SELECT id, password, name, age, gender, email FROM user where id='" + id + "';";
      var rows = await conn.query(query);
