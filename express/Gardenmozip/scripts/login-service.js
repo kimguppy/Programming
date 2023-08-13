@@ -61,7 +61,7 @@ exports.SignIn = async function(req){
 */
 
 // 회원가입
-exports.SignUp = async function(req,res){
+exports.SignUp = async function(req) {
      var resultcode = 0;
 
      var conn = await pool.getConnection();    
@@ -73,23 +73,24 @@ exports.SignUp = async function(req,res){
      var gender = req.body.gender;
      var email = req.body.email;
 
-     var query = "SELECT id, password, name, age, gender, email FROM user where id='" + id +"';";
-     var rows = await conn.query(query); // 쿼리 실행
+     console.log("id:", id);
+     console.log("password:", password);
+     console.log("name:", name);
+     console.log("age:", age);
+     console.log("gender:", gender);
+     console.log("email:", email);
 
-     if(rows[0] == undefined)
-     {
-        //hasher({password:password}, async (err, pass, salt, hash) => {//
-            var query = "INSERT INTO user (id, password, name, age, gender, email) VALUES ('" + id + "','" + password + "','" + name + "', '" + age + "', '" + gender + "','" + email + "');";
-            var rows = await conn.query(query); // 쿼리 실행
-             //});//
-     }
-     else
-     {
-          // 이미 있음
+     var query = "SELECT id, password, name, age, gender, email FROM user where id='" + id + "';";
+     var rows = await conn.query(query);
+
+     if (rows[0] == undefined) {
+          var insertQuery = "INSERT INTO user (id, password, name, age, gender, email) VALUES ('" + id + "','" + password + "','" + name + "', '" + age + "', '" + gender + "','" + email + "');";
+          await conn.query(insertQuery);
+     } else {
           resultcode = 100;
      }
 
-
+     conn.release();
 
      return resultcode;
-};
+     };

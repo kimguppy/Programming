@@ -33,13 +33,6 @@ router.get("/logout", function(req,res){
 });
 
 */
-
-
-router.get("/signup", function(_req,res){
-    const filePath = path.join(__dirname, 'Gardenmozip', '/Join.html');
-	res.sendFile(filePath);
-});
-
 router.post("/signup", async function(req,res){
    // 회원가입 컨트롤러 호출
     var result = await controller_main.SignUp(req,res);

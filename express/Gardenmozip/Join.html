@@ -5,33 +5,38 @@
 <title>회원가입</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript">
-    function signup(){
-        var param = {};
-        param.id = $("#id").val();
-        param.password = $("#password").val();
-        param.name = $("#name").val();
-        param.age = $("#age").val();
-        param.gender = $("#gender").val();
-        param.email = $("#email").val();
-        var ajax = $.ajax({
+    $(document).ready(function() {
+        // 폼 제출 이벤트를 감지하여 signup 함수 실행
+        $("form").submit(function(event) {
+            event.preventDefault(); // 폼 제출을 막음
+
+            var param = {};
+            param.id = $("#id").val();
+            param.password = $("#password").val();
+            param.name = $("#name").val();
+            param.age = $("#age").val();
+            param.gender = $("#gender").val();
+            param.email = $("#email").val();
+
+            $.ajax({
                 url: "/signup",
                 data: param,
                 type: 'POST',
                 dataType: "JSON",
                 success: function (result) {
-                        alert(result.msg);
-                        location.href = "/login.html";
+                    alert(result.msg);
+                    location.href = "/login.html";
                 }
             });
-    }
+        });
+    });
 </script>
-
 </head>
-
 
 <body>
     <center>
     <table border=1>
+    <form action="/signup" method="post">
     <tr>
     <td colspan="2" align=center>
     <b><font size=5>회원가입</font></b>
@@ -52,11 +57,10 @@
 <tr><td>이메일 : </td><td><input type="text" id="email" name="email" size=30></td></tr>
 <tr>
 <td colspan="2" align=center>
-    <input type="submit" value="회원가입"  onclick="signup();" >
+    <input type="submit" value="회원가입">
 </td>
 </tr>
-
-    
+</form>
     </table>
     </center>
 </body>

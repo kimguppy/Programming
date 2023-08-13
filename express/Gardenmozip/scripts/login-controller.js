@@ -27,8 +27,9 @@ exports.SignIn =  async function(req,res){
 */
 
 // 회원가입 컨트롤러
-exports.SignUp =  async function(req,res){
-     //console.log( req.body);
+exports.SignUp =  async function(req,_res){
+     const requestData = req.body
+     console.log( req.body);
 
      var result =  await service_main.SignUp(req);     
 

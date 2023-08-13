@@ -6,11 +6,14 @@ const dbconfig = require('./config/dbinfo.js');
 const connection = mysql.createConnection(dbconfig);
 const app = express();
 const cors = require('cors'); 
+const bodyParser = require('body-parser');
 const port = 3000;
 
 const router = require('./Gardenmozip/scripts/login-router.js'); // 라우터 설정을 별도의 파일로 분리
 app.use('/', router);
-
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+app.use(express.json());
 
 app.use(
         cors({
