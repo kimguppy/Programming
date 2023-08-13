@@ -13,7 +13,7 @@ const pool = mariadb.createPool({
   database : 'gardenbase' 
 });
 
-
+/*
 // 로그인 서비스
 exports.SignIn = async function(req){
      var json = {};
@@ -58,7 +58,7 @@ exports.SignIn = async function(req){
      
 };
 
-
+*/
 
 // 회원가입
 exports.SignUp = async function(req,res){

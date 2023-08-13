@@ -6,7 +6,7 @@ var router = express.Router();
 
 var controller_main = require("./login-controller.js");
 
-
+/*
 // 로그인 라우터
 router.get("/login", function(req,res){
      res.sendFile(path.join(__dirname , "../public/login.html"));
@@ -31,6 +31,8 @@ router.get("/logout", function(req,res){
      
      res.sendFile(path.join(__dirname , "../public/login.html"));
 });
+
+*/
 
 
 router.get("/signup", function(_req,res){

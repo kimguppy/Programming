@@ -2,6 +2,8 @@
 
 var  service_main = require("./login-service.js");
 
+
+/*
 // 회원로그인 컨트롤러
 exports.SignIn =  async function(req,res){
      //console.log( req.body);
@@ -21,6 +23,8 @@ exports.SignIn =  async function(req,res){
 
      return result;
 };
+
+*/
 
 // 회원가입 컨트롤러
 exports.SignUp =  async function(req,res){
