@@ -1,0 +1,105 @@
+button{all: unset;}
+
+* {
+    margin: 0px;
+    padding: 0px;
+    text-decoration: none;
+    font-family:sans-serif;
+  
+  }
+
+  .join-outer {
+    display:inline-block;
+    width: 400px;
+    padding: 40px;
+    box-sizing: border-box;
+    width: 100%;
+    text-align: center;
+  }
+
+  .join-wrapper > h2{
+    font-size: 24px;
+    color :rgb(42, 82, 81);
+    margin-bottom: 20px;
+  }
+  
+  .textForm {
+    border-bottom: 2px solid #adadad;
+    margin: 40px 250px 40px 250px;
+    padding: 10px 10px;
+    color: #636e72;
+    font-size:16px;
+    height:25px;
+    color: #636e72;
+    font-size:16px;
+    height:25px;
+    background: none;
+  }
+  
+  
+  .id {
+    width: 100%;
+    border:none;
+    outline:none;
+    color: #636e72;
+    font-size:16px;
+    height:25px;
+    background: none;
+  }
+  
+  .password {
+    width: 100%;
+    border:none;
+    outline:none;
+    color: #636e72;
+    font-size:16px;
+    height:25px;
+    background: none;
+  }
+  
+  .name {
+    width: 100%;
+    border:none;
+    outline:none;
+    color: #636e72;
+    font-size:16px;
+    height:25px;
+    background: none;
+  }
+  
+  .email {
+    width: 100%;
+    border:none;
+    outline:none;
+    color: #636e72;
+    font-size:16px;
+    height:25px;
+    background: none;
+  }
+  
+  .age {
+    width: 100%;
+    border:none;
+    outline:none;
+    color: #636e72;
+    font-size:16px;
+    height:25px;
+    background: none;
+  }
+  
+
+.join-wrapper > input[type="submit"]{
+    height: 60px;
+    padding: 0 50px;
+    color: #fff;
+    box-sizing: border-box;
+    font-size: 20px;
+    border-radius: 6px;
+    margin-bottom: 16px;
+    background-color:rgb(42, 82, 81);
+    margin-top: 20px;
+}
+  
+  .btn:hover {
+    background-position: right;
+  }

@@ -2,28 +2,30 @@
 
 var  service_main = require("./login-service.js");
 
-/*
+const path = require("path");
+var  express = require("express");
+
+const app = express();
+app.use(express.json());
+app.use(express.urlencoded({ extended: true  }));
+
 // 회원로그인 컨트롤러
 exports.SignIn =  async function(req,res){
-     //console.log( req.body);
-     var result =  await service_main.SignIn(req);     
-     if(result.code ==0)
-     {
-     	// 로그인 성공시 쿠키 생성
-          res.cookie('userid', result.data.userid);
-          res.cookie('username', result.data.name, {
-               maxAge:60*60*1000,
-               path:"/"
-          });
-          
-          //  로그인 후 사용자 정보를 세션에 저장
-          // req.session.user = result;
-     }
 
+     var result =  await service_main.SignIn(req);
+     msg = "로그인완료";
+     console.log(msg);
+
+     if(result.code == 0)
+     {
+          res.cookie('username', result.data.name);
+          res.cookie('userid', result.data.id);
+          console.log(result);
+     }
      return result;
+
 };
 
-*/
 
 // 회원가입 컨트롤러
 exports.SignUp =  async function(req,res){

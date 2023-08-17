@@ -3,8 +3,31 @@
 <head>
 	<title>정원모집</title>
 	<link type="text/css" rel="stylesheet" href="/styles/login.css">
+	<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        function login(){
+                var param = {};
+                param.id = $("#id").val();
+                param.password = $("#password").val();
 
-	<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />	
+                var ajax = $.ajax({
+                    url: "/logup",
+                    data: param,
+                    type: 'POST',
+                    dataType: "JSON",
+                    success: function (result) {
+                        alert(result.msg);
+                        if(result.code == 0){
+                            movepagemain();
+                        }else{movepagelogin();
+                        };
+                            
+                        
+                    }
+                });
+        }
+</script>	
 </head>
 
 
@@ -28,12 +51,14 @@
             <div class="login-outer">
                 <div class="login-wrapper">
                     <h2>Login</h2>
-                        <form method="post" action="서버의url" id="login-form">
-                            <input type="text" name="userName" placeholder="Email">
-                            <input type="password" name="userPassword" placeholder="Password">
+                        <form id="login-form">
+                            <input type="text" name="id" id="id" placeholder="Id">
+                            <input type="password" name="password" id="password" placeholder="Password">
 
-                            <input type="submit" value="Login">
+                            <input type="submit" value="Login" onclick="login();">
                         </form>
+
+
                         <div class="Join-wrapper">
                             <input class= "Joinbut" type = "submit"  value= "아이디가 없으신가요?" onclick= "movepagejoin()">
                             <script type= "text/javascript">

@@ -12,14 +12,14 @@ const router = require('./Gardenmozip/scripts/login-router.js'); // 라우터 �
 app.use('/', router);
 
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: true  }));
+
 
 app.use(
         cors({
                 origin: 'http://35.175.137.182:3000', // 여기서 따옴표 수정
                 credentials: true,
         }));
-
 
 app.listen(port, () => {
 	console.log(`Example app listening http://localhost:${port}`);

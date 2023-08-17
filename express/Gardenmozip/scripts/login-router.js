@@ -4,42 +4,33 @@ const path = require("path");
 var  express = require("express");
 var router = express.Router();
 
-var controller_main = require("./login-controller.js");
-/*
-// 로그인 라우터
-router.get("/login", function(req,res){
-     res.sendFile(path.join(__dirname , "../public/login.html"));
-});
+router.use(express.json());
+router.use(express.urlencoded({ extended: true }));
 
-router.post("/login", async function(req,res){
+var controller_main = require("./login-controller.js");
+
+
+router.post("/logup", async function(req,res){
     // 로그인 확인을 위해 컨트롤러 호출
-     var result = await controller_main.SignIn(req,res);   
-     res.send(result);
+    var result = await controller_main.SignIn(req,res);   
+    res.send(result);
 });
 
 // 로그아웃
 router.get("/logout", function(req,res){
-     console.log("clear cookie");
-     // 로그아웃 쿠키 삭제
-     res.clearCookie('userid');
-     res.clearCookie('username');
+    console.log("clear cookie");
+    // 로그아웃 쿠키 삭제
+    res.clearCookie('id');
+    res.clearCookie('password');
 
-	 // 세션정보 삭제
-	 console.log("destroy session");
-     req.session.destroy();
-     
-     res.sendFile(path.join(__dirname , "../public/login.html"));
+    // 세션정보 삭제
+    console.log("destroy session");
+    req.session.destroy();
+    
+    res.sendFile(path.join(__dirname , "../login.html"));
 });
 
-*/
 
-router.use(express.json());
-router.use(express.urlencoded({ extended: false }));
-
-
-router.get("/signup", function(req,res){
-    res.sendFile(path.join(__dirname , "./Join.html"));
-});
 
 router.post("/signup", async function(req,res){
    // 회원가입 컨트롤러 호출
