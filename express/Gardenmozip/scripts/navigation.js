@@ -37,6 +37,7 @@ function movepagejoin() {
 function movepagemain() {
     location.href = "/";
 }
+
 function logout() {
     const confirmLogout = confirm('로그아웃하시겠습니까?');
     if (confirmLogout) {

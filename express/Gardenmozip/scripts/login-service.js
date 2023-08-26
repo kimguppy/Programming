@@ -68,9 +68,6 @@ exports.SignIn = async function(req){
 // 회원가입
 exports.SignUp = async function(req) {
      var resultcode = 0;
-
-     console.log("id:", id);
-
      var conn = await pool.getConnection();    
 
      var id = req.body.id;
@@ -94,3 +91,28 @@ exports.SignUp = async function(req) {
 
      return resultcode;
      };
+
+     
+exports.Basket = async function(req) {
+     var conn = await pool.getConnection();    
+     var resultcode = 0;
+     var id = req.session.userid;
+     var item = req.body.name;
+     var image = req.body.img;
+     var price = req.body.price;
+     
+     var query = "SELECT id, item, image, price FROM basket WHERE id='" + id + "' AND item='" + item + "';";
+     var results = await conn.query(query);
+
+     if (results.length === 0) {
+     var insertQuery = "INSERT INTO basket (id, item, image, price) VALUES ('" + id + "','" + item+ "','" + image+ "','" + price+ "');";
+     await conn.query(insertQuery);
+     } else {
+          resultcode = 100;
+     }
+          
+     conn.release();
+     
+     return resultcode;
+     };
+     

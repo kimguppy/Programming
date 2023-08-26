@@ -3,14 +3,34 @@
 <head>
 	<title>정원모집</title>
     <link type="text/css" rel="stylesheet" href="/styles/package.css">
-
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        function basket(name, price,img){
+                const confirmLogout = confirm('장바구니에 담으시겠습니까?');
+                if (confirmLogout) {
+                    var param = {};
+                    param.name = name;
+                    param.price = price;
+                    param.img = img;
+                    console.log(param);
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            includeHTML();
-        });
-    </script>
+                    var ajax = $.ajax({
+                        url: "/basket",
+                        data: param,
+                        type: 'POST',
+                        dataType: "JSON",
+                        success: function (result) {
+                            if(result.code == 0){ alert(result.msg);
+                            }else{ alert('장바구니 담기에 실패했습니다.');
+                            };
+                        }, error: function () {
+                        alert('장바구니 담기에 실패했습니다.');
+                    }
+                });
+            }
+        }
+</script>	
 </head>
 
 <body>
@@ -49,7 +69,7 @@
             <div class="content">
                 <span class="main"> [바다와 유적탐방] 나크시마을 유적 및 문화탐방 </span> <br>
                 <span class="price"> 450루비 ~ </span>
-                <div class="button"type = "button" value= "장바구니에 담기">장바구니 담기</div>
+                <div class="button"type = "button" value= "장바구니에 담기" onclick= "basket('테마_나크시', 450, '/images/테마나크시.jpg')" >장바구니 담기</div>
             </div>
         </figure>
 
@@ -58,7 +78,7 @@
             <div class="content">
                 <span class="main"> [스릴넘치는 화산의 액티비티] 근성절벽, 북쪽폐광 액티비티</span> <br>
                 <span class="price"> 300루비 ~ </span>
-                <div class="button"type = "button" value= "장바구니에 담기">장바구니 담기</div>
+                <div class="button"type = "button" value= "장바구니에 담기" onclick= "basket('테마_고론', 300, '/images/테마고론.jpg')">장바구니 담기</div>
             </div>
         </figure>
 
@@ -66,8 +86,8 @@
             <img src= "/images/테마겔드산.jpg" class="gallery__img" alt="Image 3">
             <div class="content">
                 <span class="main"> [고대 전설을 찾아서] <br> 사토리산, 쌍둥이산 생명체 관측   </span> <br>
-                <span class="price"> 250루비 ~ </span>
-                <div class="button"type = "button" value= "장바구니에 담기">장바구니 담기</div>
+                <span class="price"> 350루비 ~ </span>
+                <div class="button"type = "button" value= "장바구니에 담기" onclick= "basket('테마_겔드산', 350, '/images/테마겔드산.jpg')" >장바구니 담기</div>
             </div>
         </figure>
 
@@ -75,8 +95,8 @@
             <img src="/images/테마겔드.jpg" class="gallery__img" alt="Image 4">
             <div class="content">
                 <span class="main"> [사막에서 유적지와 역사탐방] <br> 겔드마을, 카라카라 비치 관광  </span> <br>
-                <span class="price"> 400루비 ~ </span>
-                <div class="button"type = "button" value= "장바구니에 담기">장바구니 담기</div>
+                <span class="price"> 250루비 ~ </span>
+                <div class="button"type = "button" value= "장바구니에 담기" onclick= "basket('테마_겔드', 250, '/images/테마겔드.jpg')">장바구니 담기</div>
             </div>
         </figure>
 

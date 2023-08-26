@@ -1,6 +1,7 @@
 #!/usr/bin/node
 //서버라고 생각해야하네
 const express = require('express');
+var mariadb = require('mariadb');
 const path = require('path'); // path 모듈 불러오기
 const mysql = require('mysql');
 const dbconfig = require('./config/dbinfo.js');
@@ -9,6 +10,15 @@ const connection = mysql.createConnection(dbconfig);
 const app = express();
 const cors = require('cors'); 
 const port = 3000;
+
+const pool = mariadb.createPool({
+    host: '127.0.0.1', 
+    port : 3306,
+    user : 'garden',
+    password : 'garden',
+    connectionLimit: 5,
+    database : 'gardenbase' 
+});
 
 const cookieParser = require('cookie-parser');
 app.use(cookieParser());
@@ -74,10 +84,34 @@ app.get('/package', (_req, res) => {
 	res.sendFile(filePath);
 });
 
-app.get('/mypage', (_req, res) => {
+app.get('/mypage', (req, res) => {
     const filePath = path.join(__dirname, 'Gardenmozip', '/mypage.html');
 	res.sendFile(filePath);
 });
+
+app.get('/getuserdata', (req, res) => {
+    // 세션에서 값을 가져옵니다.
+    const mynameValue = req.session.username;
+    const myemailValue = req.session.useremail;
+
+    // JSON 형태로 데이터 전송
+    res.json({ mynameValue, myemailValue });
+});
+
+app.get('/getbasket', async (req, res) => {
+        var conn = await pool.getConnection();
+        var query = "SELECT * FROM basket;";
+        var rows = await conn.query(query);
+
+        const basket1 = rows[0];
+        const basket2 = rows[1];
+        const basket3 = rows[2];
+
+        console.log( rows[0]);
+        // JSON 형태로 데이터 전송
+        res.json({ basket1, basket2, basket3 });
+});
+
 
 app.get('/thema', (_req, res) => {
     const filePath = path.join(__dirname, 'Gardenmozip', '/thema.html');
@@ -112,4 +146,19 @@ app.get('/join', (_req, res) => {
 app.get('/', (req, res) => {
 	const filePath = path.join(__dirname, 'Gardenmozip', '/main.html');
 	res.sendFile(filePath);
+});
+
+app.get('/print-session', (req, res) => {
+    if (req.session.id) {
+        res.send(`isLogined: ${req.session.isLogined}, id: ${req.session.id}`);
+    } else {
+        res.send('Session data not found');
+    }
+});
+
+app.get('/get-session', (req, res) => {
+    const sessionData = {
+        isLogined: req.session.isLogined || false
+    };
+    res.json(sessionData);
 });

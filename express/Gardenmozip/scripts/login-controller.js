@@ -27,6 +27,7 @@ exports.SignIn =  async function(req,res){
           res.cookie('userid', result.data.id);
           req.session.username = result.data.name;
           req.session.userid = result.data.id;
+          req.session.useremail = result.data.email;
           req.session.isLogined = true;
           console.log(result);
      }
@@ -44,13 +45,28 @@ exports.SignUp =  async function(req,res){
      console.log( req.body);
 
      var result =  await service_main.SignUp(req);     
-
      var msg = "가입완료";
      if(result ==100)
      {
           msg = "이미 존재하는 ID 입니다.";
      }
      
+     var json = {code:result, msg:msg};
+     console.log(json);
+
+     return json;
+};
+
+exports.Basket =  async function(req,res){
+     console.log( req.body);
+     var result =  await service_main.Basket(req);     
+     var msg = "장바구니에 담았습니다";
+
+     if(result ==100)
+     {
+          msg = "장바구니에 이미 담겨있습니다.";
+     }
+
      var json = {code:result, msg:msg};
      console.log(json);
 

@@ -3,14 +3,34 @@
 <head>
 	<title>정원모집</title>
     <link type="text/css" rel="stylesheet" href="/styles/package.css">
-
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        function basket(name, price,img){
+                const confirmLogout = confirm('장바구니에 담으시겠습니까?');
+                if (confirmLogout) {
+                    var param = {};
+                    param.name = name;
+                    param.price = price;
+                    param.img = img;
+                    console.log(param);
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            includeHTML();
-        });
-    </script>
+                    var ajax = $.ajax({
+                        url: "/basket",
+                        data: param,
+                        type: 'POST',
+                        dataType: "JSON",
+                        success: function (result) {
+                            if(result.code == 0){ alert(result.msg);
+                            }else{ alert('장바구니 담기에 실패했습니다.');
+                            };
+                        }, error: function () {
+                        alert('장바구니 담기에 실패했습니다.');
+                    }
+                });
+            }
+        }
+</script>	
 </head>
 
 <body>
@@ -47,7 +67,7 @@
             <div class="content">
                 <span class="main"> [라넬지방]  조라의 마을 생선여관 + 수상레저 패키지 </span> <br>
                 <span class="price"> 450루비 ~ </span>
-                <div class="button"type = "button" value= "장바구니에 담기">장바구니 담기</div>
+                <div class="button"type = "button" value= "장바구니에 담기" onclick= "basket('패키지_조라', 450, '/images/조라의마을.jpg')">장바구니 담기</div>
             </div>
         </figure>
 
@@ -56,7 +76,7 @@
             <div class="content">
                 <span class="main"> [헤브라지방] 리토마을 제비둥지 + 익스트림 레저 패키지</span> <br>
                 <span class="price"> 300루비 ~ </span>
-                <div class="button"type = "button" value= "장바구니에 담기">장바구니 담기</div>
+                <div class="button"type = "button" value= "장바구니에 담기" onclick= "basket('패키지_리토', 300, '/images/리토마을.jpg')">장바구니 담기</div>
             </div>
         </figure>
 
@@ -65,7 +85,7 @@
             <div class="content">
                 <span class="main"> [울딘지방] 고론시티 민박데굴데굴 + 마그마 온천 패키지 </span> <br>
                 <span class="price"> 250루비 ~ </span>
-                <div class="button"type = "button" value= "장바구니에 담기">장바구니 담기</div>
+                <div class="button"type = "button" value= "장바구니에 담기"  onclick= "basket('패키지_고론', 250, '/images/고론시티.jpg')" >장바구니 담기</div>
             </div>
         </figure>
 
@@ -74,7 +94,7 @@
             <div class="content">
                 <span class="main"> [겔드지방] 겔드의 마을 카라카라 호텔 + 바다표범 렌탈 패키지</span> <br>
                 <span class="price"> 400루비 ~ </span>
-                <div class="button"type = "button" value= "장바구니에 담기">장바구니 담기</div>
+                <div class="button"type = "button" value= "장바구니에 담기" onclick= "basket('패키지_겔드', 400, '/images/겔드마을.jpg')">장바구니 담기</div>
             </div>
         </figure>
     </div>

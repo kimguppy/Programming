@@ -3,14 +3,35 @@
 <head>
 	<title>정원모집</title>
     <link type="text/css" rel="stylesheet" href="/styles/vacation.css">
-
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        function basket(name, price,img){
+                const confirmLogout = confirm('장바구니에 담으시겠습니까?');
+                if (confirmLogout) {
+                    var param = {};
+                    param.name = name;
+                    param.price = price;
+                    param.img = img;
+                    console.log(param);
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            includeHTML();
-        });
-    </script>
+                    var ajax = $.ajax({
+                        url: "/basket",
+                        data: param,
+                        type: 'POST',
+                        dataType: "JSON",
+                        success: function (result) {
+                            if(result.code == 0){ alert(result.msg);
+                            }else{ alert('장바구니 담기에 실패했습니다.');
+                            };
+                        }, error: function () {
+                        alert('장바구니 담기에 실패했습니다.');
+                    }
+                });
+            }
+        }
+</script>	
+
 </head>
 
 <body>
@@ -38,13 +59,13 @@
     <div class="gallery">
         <div class="gallery_wrap">
         <figure class="gallery__item">
-            <img src= "/images/헤브라남부.jpg" class="gallery__img" alt="Image 1">
+            <img src= "/images/헤브라남부.jpg" class="gallery__img" alt="Image 1" >
             <div class="content">
                 <span class="main"> [인기] 헤브라남부지방 돌기둥 유적 </span> <br>
                 <span class="price"> 450루비 ~ </span>
             </div>
         </figure>
-        <div class="button"type = "button" value= "장바구니에 담기">장바구니 담기</div>
+        <div class="button"type = "button" value= "장바구니에 담기" onclick= "basket('숲_1', 450, '/images/헤브라남부.jpg')" >장바구니 담기</div>
         </div>
 
         <div class="gallery_wrap">
@@ -55,7 +76,7 @@
                 <span class="price"> 300루비 ~ </span>
             </div>
         </figure>
-        <div class="button"type = "button" value= "장바구니에 담기">장바구니 담기</div>
+        <div class="button"type = "button" value= "장바구니에 담기" onclick= "basket('숲_2', 300, '/images/리토마을.jpg')">장바구니 담기</div>
         </div>
         <div class="gallery_wrap">
             <figure class="gallery__item">
@@ -65,7 +86,7 @@
                     <span class="price"> 300루비 ~ </span>
                 </div>
             </figure>
-            <div class="button"type = "button" value= "장바구니에 담기">장바구니 담기</div>
+            <div class="button"type = "button" value= "장바구니에 담기" onclick= "basket('숲_3', 300, '/images/시자기마을.jpg')" >장바구니 담기</div>
             </div>
 
     </div>
@@ -81,7 +102,7 @@
                 <span class="price"> 450루비 ~ </span>
             </div>
         </figure>
-        <div class="button"type = "button" value= "장바구니에 담기">장바구니 담기</div>
+        <div class="button"type = "button" value= "장바구니에 담기" onclick= "basket('바다_1', 400, '/images/조라의마을.jpg')">장바구니 담기</div>
         </div>
 
         <div class="gallery_wrap">
@@ -92,7 +113,7 @@
                 <span class="price"> 300루비 ~ </span>
             </div>
         </figure>
-        <div class="button"type = "button" value= "장바구니에 담기">장바구니 담기</div>
+        <div class="button"type = "button" value= "장바구니에 담기" onclick= "basket('바다_2', 300, '/images/라넬습원.jpg')">장바구니 담기</div>
         </div>
 
         <div class="gallery_wrap">
@@ -103,7 +124,7 @@
                     <span class="price"> 300루비 ~ </span>
                 </div>
             </figure>
-            <div class="button"type = "button" value= "장바구니에 담기">장바구니 담기</div>
+            <div class="button"type = "button" value= "장바구니에 담기" onclick= "basket('바다_3', 300, '/images/나크시마을.jpg')" >장바구니 담기</div>
             </div>
 
     </div>

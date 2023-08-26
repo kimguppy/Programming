@@ -15,6 +15,13 @@ router.post("/logup", async function(req,res){
     res.send(result);
 });
 
+router.post("/basket", async function(req,res){
+    // 장바구니을 위해 컨트롤러 호출
+    var result = await controller_main.Basket(req,res); 
+    res.send(result);
+});
+
+
 // 로그아웃
 router.get("/logout", function(req,res){
     console.log("clear cookie");

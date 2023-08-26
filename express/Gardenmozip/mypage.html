@@ -3,21 +3,12 @@
 <head>
 	<title>정원모집</title>
 	<link type="text/css" rel="stylesheet" href="/styles/mypage.css">
-
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            includeHTML();
-        });
-    </script>
-
 </head>
 
 <body>
 
 <div id="header_container"></div>
-
     <script>
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
@@ -28,8 +19,6 @@
     xhttp.open("GET", "./header", true);
     xhttp.send();
     </script>
-
-
     <br>
     <section>
     <div class="wrapper">
@@ -41,9 +30,28 @@
                 </div>
                 
                 <br>        
-                <div class="name">김링크</div>
-                <div class="id">idididid@naver.com</div>
-                
+                <div id="myname"></div>
+                <div id="mymail"></div>
+                <script>
+                    function assignValues(mynameValue, myemailValue) {
+                        var mynameDiv = document.getElementById('myname');
+                        var myemailDiv = document.getElementById('mymail');
+
+                        mynameDiv.textContent = mynameValue;
+                        myemailDiv.textContent = myemailValue;
+                    }
+
+                    // 서버에서 데이터를 가져와서 할당하는 함수 호출
+                    var xhttp = new XMLHttpRequest();
+                    xhttp.onreadystatechange = function() {
+                        if (this.readyState == 4 && this.status == 200) {
+                            var data = JSON.parse(this.responseText);
+                            assignValues(data.mynameValue, data.myemailValue);
+                        }
+                    };
+                    xhttp.open("GET", "/getuserdata", true); // 서버에서 데이터 가져올 경로
+                    xhttp.send();
+                </script>
             </div>
 
         </aside>
@@ -55,10 +63,32 @@
             <div class="contain">
                 <h2> 장바구니</h2><br> <hr><br> 
                 <div class="tripimg">
-                    <img>
-                    <img>
-                    <img>
+                    <img id="basket1" >
+                    <img id="basket2">
+                    <img id="basket3">
                 </div>
+                <script>
+                    function assignbasketValues(basket1, basket2, basket3) {
+                        var basket1Div = document.getElementById('basket1');
+                        var basket2Div = document.getElementById('basket2');
+                        var basket3Div = document.getElementById('basket3');
+
+                        basket1Div.src = basket1.image;
+                        basket2Div.src = basket2.image;
+                        basket3Div.src = basket3.image;
+                    }
+
+                    // 서버에서 데이터를 가져와서 할당하는 함수 호출
+                    var xhttp = new XMLHttpRequest();
+                    xhttp.onreadystatechange = function() {
+                        if (this.readyState == 4 && this.status == 200) {
+                            var data = JSON.parse(this.responseText);
+                            assignbasketValues(data.basket1, data.basket2, data.basket3);
+                        }
+                    };
+                    xhttp.open("GET", "/getbasket", true); // 서버에서 데이터 가져올 경로
+                    xhttp.send();
+                </script>
                 <br><br><br>       
             </div>
 
