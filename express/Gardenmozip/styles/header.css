@@ -61,15 +61,17 @@ header{
   text-align: left;
 }
 
-#login_ > ul > li {
-  display:inline-block;
+#before > ul > li,
+#after > ul > li {
+    display: inline-block;
 }
 
-#login_ > ul > li > input{
-  color:#ffffff;
-  margin: 0 10px ;
-  font-weight: bold;
-  text-shadow: 1px 1px 2px rgb(6, 62, 65);
+#before > ul > li > input,
+#after > ul > li > input {
+    color: #ffffff;
+    margin: 0 10px;
+    font-weight: bold;
+    text-shadow: 1px 1px 2px rgb(6, 62, 65);
 }
 
 .menu{

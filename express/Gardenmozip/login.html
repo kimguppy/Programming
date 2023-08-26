@@ -17,14 +17,15 @@
                     type: 'POST',
                     dataType: "JSON",
                     success: function (result) {
-                        alert(result.msg);
                         if(result.code == 0){
+                            alert(result.msg);
                             movepagemain();
                         }else{movepagelogin();
+                            alert('로그인 요청이 실패했습니다. 다시 시도해주세요.');
                         };
-                            
-                        
-                    }
+                    }, error: function () {
+                    alert('로그인 요청이 실패했습니다. 다시 시도해주세요.');
+        }
                 });
         }
 </script>	
@@ -33,7 +34,6 @@
 
 <body>
     <div id="header_container"></div>
-    
     <script>
         var xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function() {
@@ -54,10 +54,8 @@
                         <form id="login-form">
                             <input type="text" name="id" id="id" placeholder="Id">
                             <input type="password" name="password" id="password" placeholder="Password">
-
                             <input type="submit" value="Login" onclick="login();">
                         </form>
-
 
                         <div class="Join-wrapper">
                             <input class= "Joinbut" type = "submit"  value= "아이디가 없으신가요?" onclick= "movepagejoin()">
@@ -86,5 +84,6 @@
     </section>
 </body>
 </html>
+
 
 <script src="scripts/navigation.js" type="text/javascript"></script>

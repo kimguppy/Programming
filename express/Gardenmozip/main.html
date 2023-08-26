@@ -4,27 +4,19 @@
     <title>정원모집</title>
     <link type="text/css" rel="stylesheet" href="/styles/main.css">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            includeHTML();
-        });
-    </script>
-
 </head>
 
 <body>
-
     <div id="header_container"></div>
     <script>
-    var xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function() {
-        if(this.readyState == 4 && this.status == 200) {
-            document.getElementById("header_container").innerHTML = this.responseText;
-        }
-    };
-    xhttp.open("GET", "./header", true);
-    xhttp.send();
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if(this.readyState == 4 && this.status == 200) {
+                document.getElementById("header_container").innerHTML = this.responseText;
+            }
+        };
+        xhttp.open("GET", "./header", true);
+        xhttp.send();
     </script>
 
 <section>

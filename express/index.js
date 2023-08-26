@@ -1,18 +1,32 @@
 #!/usr/bin/node
+//서버라고 생각해야하네
 const express = require('express');
 const path = require('path'); // path 모듈 불러오기
 const mysql = require('mysql');
 const dbconfig = require('./config/dbinfo.js');
 const connection = mysql.createConnection(dbconfig);
+
 const app = express();
 const cors = require('cors'); 
 const port = 3000;
+
+const cookieParser = require('cookie-parser');
+app.use(cookieParser());
+
+const session = require("express-session");
+
+app.use(session({
+    secret :"node-session",
+    resave:false,
+    saveUninitialized:true
+}))
 
 const router = require('./Gardenmozip/scripts/login-router.js'); // 라우터 설정을 별도의 파일로 분리
 app.use('/', router);
 
 app.use(express.json());
-app.use(express.urlencoded({ extended: true  }));
+app.use(express.urlencoded({ extended: true }));
+//데이터베이스에 새로운 유저를 추가하거나 처리하는 로직을 작성할 수 있습니다.
 
 
 app.use(
@@ -41,9 +55,14 @@ app.get('/scripts/:name', (req, res) => {
     res.sendFile(filePath);
 });
 
-app.get('/header', (_req, res) => {
-    const filePath = path.join(__dirname, 'Gardenmozip', '/header.html');
+app.get('/header', (req, res) => {
+    if(req.session.isLogined){
+    const filePath = path.join(__dirname, 'Gardenmozip', '/header2.html');
 	res.sendFile(filePath);
+    }else{
+        const filePath = path.join(__dirname, 'Gardenmozip', '/header.html');
+        res.sendFile(filePath);
+        }
 });
 app.get('/footer', (_req, res) => {
     const filePath = path.join(__dirname, 'Gardenmozip', '/footer.html');
@@ -90,7 +109,7 @@ app.get('/join', (_req, res) => {
 	res.sendFile(filePath);
 });
 
-app.get('/', (_req, res) => {
+app.get('/', (req, res) => {
 	const filePath = path.join(__dirname, 'Gardenmozip', '/main.html');
 	res.sendFile(filePath);
 });

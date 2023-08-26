@@ -9,7 +9,7 @@ var  express = require("express");
 
 const app = express();
 app.use(express.json());
-app.use(express.urlencoded({ extended: true  }));
+app.use(express.urlencoded({ extended: true }));
 
 const pool = mariadb.createPool({
      host: '127.0.0.1', 
@@ -25,7 +25,7 @@ const pool = mariadb.createPool({
 exports.SignIn = async function(req){
      var json = {};
      json.code = 0;
-     var conn = await pool.getConnection();    
+     var conn = await pool.getConnection(); 
      var id = req.body.id;
      var password = req.body.password;
 
@@ -49,6 +49,7 @@ exports.SignIn = async function(req){
                          json.msg = "로그인 완료";
                     }
                     console.log(json);
+                    
                     resolve(json);
           });
      }

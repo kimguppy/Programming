@@ -1,6 +1,15 @@
 <head>
 	<link type="text/css" rel="stylesheet" href="/styles/header.css">
 	<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+
+    <script type="text/javascript">
+        function logout() {
+            const confirmLogout = confirm('로그아웃하시겠습니까?');
+            if (confirmLogout) {
+                location.href = "/logout";
+            }
+    }
+    </script>
 </head>
 
 <body>
@@ -19,21 +28,15 @@
     </script>
 
         <nav id="login_">
-                <div id="before">
+                <div id="after">
                     <ul>
-                        <li><input class= "mybut" type = "button"  value= "로그인" onclick= "movepagelogin()"></li>
+                        <li><input class= "mybut" type = "button" value= "로그아웃" onclick= "logout()"></li>
+                        <li><input class= "mybut" type = "button" value= "마이페이지" onclick= "movepagemypage()"></li>
                         <script type= "text/javascript">
-                            function movepagelogin() {
-                                location.href = "/login"
+                            function movepagemypage() {
+                                location.href = "/mypage"
                             }
                         </script>
-
-                        <li><input class="mybut" type = "submit" value="회원가입" onclick="movepagejoin()"></li>
-                            <script type= "text/javascript">
-                                    function movepagejoin() {
-                                    location.href = "/Join.html"
-                                    }
-                            </script>
                         <li><input class= "mybut" type = "button" value= "고객센터" onclick= "movepagecenter()"></li>
                         <script type= "text/javascript">
                             function movepagecenter() {
@@ -42,6 +45,7 @@
                         </script>
                     </ul>
                 </div>
+        
         </nav>
 </div>
 
@@ -82,4 +86,3 @@
 </body>
 
 <script src="scripts/navigation.js" type="text/javascript"></script>
-<script src="scripts/cookie.js" type="text/javascript"></script>
